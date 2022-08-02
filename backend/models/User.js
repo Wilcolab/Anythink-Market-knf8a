@@ -128,3 +128,4 @@ UserSchema.methods.isFollowing = function(id) {
 };
 
 mongoose.model("User", UserSchema);
+module.exports=UserSchema;
