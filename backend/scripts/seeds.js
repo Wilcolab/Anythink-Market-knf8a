@@ -48,6 +48,3 @@ mongoose.connect(process.env.MONGODB_URI).then((conn) => {
   }
 });
 
-// const saveData = async()=>{
-
-// }
