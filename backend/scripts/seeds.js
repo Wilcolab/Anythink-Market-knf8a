@@ -42,15 +42,9 @@ mongoose.connect(process.env.MONGODB_URI).then((conn) => {
 
     item.comments.push(comment._id);
 
-    user.save().then(data=>{
-      if(data) console.log(data);
-    });
-    item.save().then(data=>{
-      if(data) console.log(data);
-    });
-    comment.save().then(data=>{
-      if(data) console.log(data);
-    });
+    user.save();
+    item.save();
+    comment.save();
   }
 });
 
