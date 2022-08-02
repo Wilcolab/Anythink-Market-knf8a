@@ -10,10 +10,10 @@ if (!process.env.MONGODB_URI) {
   console.warn("Missing MONGODB_URI in env, please add it to your .env file");
 }
 
-mongoose.connect(process.env.MONGODB_URI).then((conn) => {
+mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true , useUnifiedTopology: true }).then((conn) => {
   console.log("Mongo connected");
 
-  for (let i = 1; i < 100; i++) {
+  for (let i = 0; i < 1; i++) {
     let user = new User({
       username: `fakeUser${i}`,
       email: `fakeEmail${i}@anythink.com`,
