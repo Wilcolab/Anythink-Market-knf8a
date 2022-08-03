@@ -40,7 +40,6 @@ router.get("/", auth.optional, function(req, res, next) {
   var query = {};
   var limit = 100;
   var offset = 0;
-  // var title='';
 
   if (typeof req.query.limit !== "undefined") {
     limit = req.query.limit;
@@ -55,7 +54,7 @@ router.get("/", auth.optional, function(req, res, next) {
   }
 
   if(typeof req.query.title!=="undefined"){
-    query.title = req.query.title;
+    query.title = new RegExp(req.query.title,"i");
   }
 
   Promise.all([
