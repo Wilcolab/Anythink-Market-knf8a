@@ -39,21 +39,21 @@ var UserSchema = new mongoose.Schema(
 
 UserSchema.plugin(uniqueValidator, { message: "is already taken." });
 
-UserSchema.methods.validPassword = function(password) {
+UserSchema.methods.validPassword = function (password) {
   var hash = crypto
     .pbkdf2Sync(password, this.salt, 10000, 512, "sha512")
     .toString("hex");
   return this.hash === hash;
 };
 
-UserSchema.methods.setPassword = function(password) {
+UserSchema.methods.setPassword = function (password) {
   this.salt = crypto.randomBytes(16).toString("hex");
   this.hash = crypto
     .pbkdf2Sync(password, this.salt, 10000, 512, "sha512")
     .toString("hex");
 };
 
-UserSchema.methods.generateJWT = function() {
+UserSchema.methods.generateJWT = function () {
   var today = new Date();
   var exp = new Date(today);
   exp.setDate(today.getDate() + 60);
@@ -68,7 +68,7 @@ UserSchema.methods.generateJWT = function() {
   );
 };
 
-UserSchema.methods.toAuthJSON = function() {
+UserSchema.methods.toAuthJSON = function () {
   return {
     username: this.username,
     email: this.email,
@@ -79,7 +79,7 @@ UserSchema.methods.toAuthJSON = function() {
   };
 };
 
-UserSchema.methods.toProfileJSONFor = function(user) {
+UserSchema.methods.toProfileJSONFor = function (user) {
   return {
     username: this.username,
     bio: this.bio,
@@ -89,7 +89,7 @@ UserSchema.methods.toProfileJSONFor = function(user) {
   };
 };
 
-UserSchema.methods.favorite = function(id) {
+UserSchema.methods.favorite = function (id) {
   if (this.favorites.indexOf(id) === -1) {
     this.favorites = this.favorites.concat([id]);
   }
@@ -97,18 +97,18 @@ UserSchema.methods.favorite = function(id) {
   return this.save();
 };
 
-UserSchema.methods.unfavorite = function(id) {
+UserSchema.methods.unfavorite = function (id) {
   this.favorites.remove(id);
   return this.save();
 };
 
-UserSchema.methods.isFavorite = function(id) {
-  return this.favorites.some(function(favoriteId) {
+UserSchema.methods.isFavorite = function (id) {
+  return this.favorites.some(function (favoriteId) {
     return favoriteId.toString() === id.toString();
   });
 };
 
-UserSchema.methods.follow = function(id) {
+UserSchema.methods.follow = function (id) {
   if (this.following.indexOf(id) === -1) {
     this.following = this.following.concat([id]);
   }
@@ -116,13 +116,13 @@ UserSchema.methods.follow = function(id) {
   return this.save();
 };
 
-UserSchema.methods.unfollow = function(id) {
+UserSchema.methods.unfollow = function (id) {
   this.following.remove(id);
   return this.save();
 };
 
-UserSchema.methods.isFollowing = function(id) {
-  return this.following.some(function(followId) {
+UserSchema.methods.isFollowing = function (id) {
+  return this.following.some(function (followId) {
     return followId.toString() === id.toString();
   });
 };

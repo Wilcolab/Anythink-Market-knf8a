@@ -56,8 +56,8 @@ const Items = {
     requests.get(`/items?seller=${encode(seller)}&${limit(500, page)}`),
   byTag: (tag, page) =>
     requests.get(`/items?tag=${encode(tag)}&${limit(1000, page)}`),
-  bySearch: (searchTerm) =>{
-    console.log("puru",searchTerm);
+  bySearch: (searchTerm) => {
+    console.log("puru", searchTerm);
     return requests.get(`/items?title=${searchTerm}`)
   },
   del: (slug) => requests.del(`/items/${slug}`),

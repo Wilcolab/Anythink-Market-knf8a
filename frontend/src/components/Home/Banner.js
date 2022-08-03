@@ -15,7 +15,7 @@ const Banner = (props) => {
         <div>
           <span id="get-part">A place to get</span>
           <span>
-            <input type="text" id="search-box" className="m-1 p-1 pl-2" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} placeholder="search" />
+            <input type="text" id="search-box" className="m-1 p-1 pl-2" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="search" />
           </span>
           <span> the cool stuff.</span>
         </div>
