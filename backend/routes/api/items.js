@@ -40,7 +40,7 @@ router.get("/", auth.optional, function(req, res, next) {
   var query = {};
   var limit = 100;
   var offset = 0;
-  var title='';
+  // var title='';
 
   if (typeof req.query.limit !== "undefined") {
     limit = req.query.limit;
@@ -54,19 +54,17 @@ router.get("/", auth.optional, function(req, res, next) {
     query.tagList = { $in: [req.query.tag] };
   }
 
+  if(req.query.title){
+    query.title = req.query.title;
+  }
+
   Promise.all([
     req.query.seller ? User.findOne({ username: req.query.seller }) : null,
     req.query.favorited ? User.findOne({ username: req.query.favorited }) : null,
-    req.query.title ? Item.findOne({ title: req.query.title }) : null
   ])
     .then(function(results) {
       var seller = results[0];
       var favoriter = results[1];
-      var title = results[2];
-
-      if(title){
-        query.title=title.title;
-      }
 
       if (seller) {
         query.seller = seller._id;
