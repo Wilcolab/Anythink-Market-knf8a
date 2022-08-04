@@ -1,16 +1,16 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import logo from "../../imgs/logo.png";
 import agent from "../../agent";
 
 const Banner = (props) => {
-  let [searchTerm, setSearchTerm] = React.useState('');
+  let [searchTerm, setSearchTerm] = React.useState("");
 
-  useEffect(()=>{
-    if(searchTerm.length>=3)
+  useEffect(() => {
+    if (searchTerm.length >= 3)
       props.onSearch(searchTerm, agent.Items.bySearch(searchTerm));
-      else if(searchTerm.length===2)
+    else if (searchTerm.length === 2)
       props.onSearch(searchTerm, agent.Items.all());
-    },[searchTerm]);
+  }, [searchTerm]);
 
   return (
     <div className="banner text-white">

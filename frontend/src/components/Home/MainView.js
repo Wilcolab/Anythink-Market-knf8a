@@ -70,8 +70,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const MainView = (props) => {
-  if(props.items?.length===0 && props.searchTerm?.length>=3){
-    return (<div id="empty">There is no items matched with search</div>)
+  if (props.items?.length === 0 && props.searchTerm?.length >= 3) {
+    return <div id="empty">There is no items matched with search</div>;
   }
   return (
     <div>
