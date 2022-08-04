@@ -4,6 +4,7 @@ import agent from "../../agent";
 
 const Banner = (props) => {
   let [searchTerm, setSearchTerm] = React.useState("");
+  let [isVisible, setIsVisible] = React.useState(false);
 
   useEffect(() => {
     if (searchTerm.length >= 3)
@@ -17,8 +18,8 @@ const Banner = (props) => {
       <div className="container p-4 text-center">
         <img src={logo} alt="banner" />
         <div>
-          <span id="get-part">A place to get</span>
-          <span>
+          <span id="get-part">A place to <span onClick={()=>setIsVisible(!isVisible)}>get</span></span>
+          { isVisible&& <span>
             <input
               type="text"
               id="search-box"
@@ -26,7 +27,7 @@ const Banner = (props) => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </span>
+          </span>}
           <span> the cool stuff.</span>
         </div>
       </div>
