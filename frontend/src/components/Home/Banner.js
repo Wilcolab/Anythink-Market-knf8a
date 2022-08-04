@@ -19,7 +19,7 @@ const Banner = (props) => {
         <img src={logo} alt="banner" />
         <div>
           <span id="get-part">A place to <span onClick={()=>setIsVisible(!isVisible)}>get</span></span>
-          { isVisible&& <span>
+          {/* { isVisible&& <span>
             <input
               type="text"
               id="search-box"
@@ -27,7 +27,7 @@ const Banner = (props) => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </span>}
+          </span>} */}
           <span> the cool stuff.</span>
         </div>
       </div>
