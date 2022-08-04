@@ -18,16 +18,20 @@ const Banner = (props) => {
       <div className="container p-4 text-center">
         <img src={logo} alt="banner" />
         <div>
-          <span onClick={()=>setIsVisible(!isVisible)} id="get-part">A place to get</span>
-          { isVisible&& <span>
-            <input
-              type="text"
-              id="search-box"
-              className="m-1 p-1 pl-2"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </span>}
+          <span onClick={() => setIsVisible(!isVisible)} id="get-part">
+            A place to get
+          </span>
+          {isVisible && (
+            <span>
+              <input
+                type="text"
+                id="search-box"
+                className="m-1 p-1 pl-2"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </span>
+          )}
           <span> the cool stuff.</span>
         </div>
       </div>
