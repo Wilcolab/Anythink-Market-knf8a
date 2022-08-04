@@ -70,14 +70,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const MainView = (props) => {
-  if(props.itemsCount===0)
-  return (
-    <div id="empty">
-      There is no items here... yet.
-    </div>
-  );
   return (
     <div>
+      <div id="empty">
+        {props.itemsCount===0 && "There is no items here... yet."}
+      </div>{props.itemsCount ||(<>
       <div className="feed-toggle">
         <ul className="nav nav-tabs">
           <YourFeedTab
@@ -98,7 +95,7 @@ const MainView = (props) => {
         loading={props.loading}
         itemsCount={props.itemsCount}
         currentPage={props.currentPage}
-      />
+      /></>)}
     </div>
   );
 };
