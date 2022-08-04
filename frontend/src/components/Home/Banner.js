@@ -4,8 +4,8 @@ import agent from "../../agent";
 
 const Banner = (props) => {
   let [searchTerm, setSearchTerm] = React.useState("");
-  
-  if(searchTerm.length >= 3) {
+
+  if (searchTerm.length >= 3) {
     props.onSearch(searchTerm, agent.Items.bySearch(searchTerm));
   }
   return (
@@ -15,7 +15,13 @@ const Banner = (props) => {
         <div>
           <span id="get-part">A place to get</span>
           <span>
-            <input type="text" id="search-box" className="m-1 p-1 pl-2" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)}/>
+            <input
+              type="text"
+              id="search-box"
+              className="m-1 p-1 pl-2"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </span>
           <span> the cool stuff.</span>
         </div>
