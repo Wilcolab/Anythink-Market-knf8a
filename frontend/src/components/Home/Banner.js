@@ -1,13 +1,17 @@
-import React from "react";
+import React,{useEffect} from "react";
 import logo from "../../imgs/logo.png";
 import agent from "../../agent";
 
 const Banner = (props) => {
-  let [searchTerm, setSearchTerm] = React.useState("");
+  let [searchTerm, setSearchTerm] = React.useState('');
 
-  if (searchTerm.length >= 3) {
-    props.onSearch(searchTerm, agent.Items.bySearch(searchTerm));
-  }
+  useEffect(()=>{
+    if(searchTerm.length>=3)
+      props.onSearch(searchTerm, agent.Items.bySearch(searchTerm));
+      else if(searchTerm.length===2)
+      props.onSearch(searchTerm, agent.Items.all());
+    },[searchTerm]);
+
   return (
     <div className="banner text-white">
       <div className="container p-4 text-center">

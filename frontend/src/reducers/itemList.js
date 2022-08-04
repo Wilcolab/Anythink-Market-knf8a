@@ -52,6 +52,7 @@ const reducer = (state = {}, action) => {
         ...state,
         items: action.payload.items,
         itemsCount: action.payload.itemsCount,
+        searchTerm: action.searchTerm,
         tab: null,
         currentPage: 0,
       };
