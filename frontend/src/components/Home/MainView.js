@@ -70,6 +70,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const MainView = (props) => {
+  if(props.itemsCount===0)
+  return (
+    <div id="empty">
+      There is no items here... yet.
+    </div>
+  );
   return (
     <div>
       <div className="feed-toggle">

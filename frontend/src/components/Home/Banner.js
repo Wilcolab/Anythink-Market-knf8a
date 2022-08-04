@@ -18,7 +18,7 @@ const Banner = (props) => {
             <input
               type="text"
               id="search-box"
-              className="m-1 p-1 pl-2"
+              className="mx-4 p-1 pl-2"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
