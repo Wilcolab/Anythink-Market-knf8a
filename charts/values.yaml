@@ -1,0 +1,67 @@
+clusterEnv: ""
+productionBackendHost: "prod.anythink.market"
+stagingBackendHost: "staging.anythink.market"
+
+backend:
+  serviceName: anythink-backend
+  containerPort: 3000
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 80
+  image:
+    repository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/anythink-backend
+    stagingRepository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/staging-anythink-backend
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+  resources:
+    limits:
+      cpu: 100m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+frontend:
+  serviceName: anythink-frontend
+  containerPort: 3001
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 80
+  image:
+    repository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/anythink-frontend
+    stagingRepository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/staging-anythink-frontend
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+  resources:
+    limits:
+      cpu: 600m
+      memory: 768Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+database:
+  serviceName: mongodb-node
+  containerPort: 27017
+  servicePort: 27017
+  connectionProtocol: mongodb://
+  databaseName: anythink-market
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 80
+  image:
+    repository: mongo
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi

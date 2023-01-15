@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.backend.serviceName }}
+  name: {{ .Values.backend.serviceName }}
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.backend.serviceName }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.backend.serviceName }}
+        date: {{ now | unixEpoch | quote }}
+    spec:
+      containers:
+        - args:
+            - sh
+            - -c
+            - "yarn seeds && yarn start"
+          env:
+            - name: MONGODB_URI
+              value: "{{ .Values.database.connectionProtocol }}{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
+            - name: NODE_ENV
+              value: development
+            - name: PORT
+              value: "{{ .Values.backend.containerPort }}"
+          image: "{{ include "anythink-tenant.backendRepository" .}}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          name: {{ .Values.backend.serviceName }}
+          ports:
+            - containerPort: {{ .Values.backend.containerPort }}
+              name: http  
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+      restartPolicy: Always
