@@ -1,0 +1,55 @@
+{
+  "name": "Anythink Development Container",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": { "VARIANT": "ubuntu-22.04" }
+  },
+
+  "forwardPorts": [3000, 3001, 5433, 27017],
+  "portsAttributes": {
+    "3000": {
+      "label": "Backend",
+      "elevateIfNeeded": true,
+      "requireLocalPort": true,
+      "onAutoForward": "silent"
+    },
+    "3001": {
+      "label": "Frontend",
+      "elevateIfNeeded": true,
+      "requireLocalPort": true,
+      "onAutoForward": "silent"
+    },
+    "5433": {
+      "label": "Database",
+      "elevateIfNeeded": true,
+      "requireLocalPort": true,
+      "onAutoForward": "silent"
+    },
+    "27017": {
+      "label": "Database",
+      "elevateIfNeeded": true,
+      "requireLocalPort": true,
+      "onAutoForward": "silent"
+    }
+  },
+  "postCreateCommand": "/bin/bash .devcontainer/setup.sh",
+
+  "features": {
+    "docker-in-docker": "latest",
+    "github-cli": "latest",
+    "ghcr.io/devcontainers/features/sshd:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+
+  "settings": {
+    "extensions.ignoreRecommendations": true,
+    "workbench.startupEditor": "none",
+    "workbench.colorTheme": "Visual Studio Dark",
+    "workbench.colorCustomizations": {},
+    "workbench.welcomePage.walkthroughs.openOnInstall": false,
+    "workbench.welcomePage.experimental.videoTutorials": "off",
+    "github.codespaces.defaultExtensions": []
+  }
+}
