@@ -177,13 +177,11 @@ jobs:
           echo "todo: setup armory GHA"
       - name: Puru1
         run: cat armory-deploy.yml     
-      - name: Puru2
-        run: cat armory-deploy.yaml
       - name: Armory CD-as-a-Service Deployment
         id: deploy
         uses: armory/cli-deploy-action@main
         with:
           clientId: ${{ secrets.ARMORY_CLIENT_ID }} 
           clientSecret:  ${{ secrets.ARMORY_CLIENT_SECRET }} 
-          path-to-file: "armory-deploy.yml" 
+          path-to-file: "/armory-deploy.yml" 
           waitForDeployment: true
