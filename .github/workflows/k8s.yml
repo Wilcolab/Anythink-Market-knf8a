@@ -175,8 +175,10 @@ jobs:
       - name: Deploy
         run: |
           echo "todo: setup armory GHA"
-      - name: Puru
-        run: ls          
+      - name: Puru1
+        run: cat armory-deploy.yml     
+      - name: Puru2
+        run: cat armory-deploy.yaml
       - name: Armory CD-as-a-Service Deployment
         id: deploy
         uses: armory/cli-deploy-action@main
