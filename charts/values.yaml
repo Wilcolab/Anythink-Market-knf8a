@@ -45,17 +45,20 @@ frontend:
       memory: 128Mi
 
 database:
-  serviceName: mongodb-node
-  containerPort: 27017
-  servicePort: 27017
-  connectionProtocol: mongodb://
+  deploy: true
+  connectionProtocol: postgresql://
+  serviceName: postgres-python
+  containerPort: 5433
+  servicePort: 5432
   databaseName: anythink-market
   replicaCount: 1
+  env:
+    password: postgres
   service:
     type: ClusterIP
     port: 80
   image:
-    repository: mongo
+    repository: postgres
     pullPolicy: IfNotPresent
     tag: "latest"
   resources:
