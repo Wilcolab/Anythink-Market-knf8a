@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component Snapshot testing with no user 1`] = `
+<nav
+  className="navbar navbar-expand-md navbar-dark"
+  style={
+    Object {
+      "padding": "0.5rem 2rem",
+    }
+  }
+>
+  <a
+    className="navbar-brand"
+    href="/"
+    onClick={[Function]}
+  >
+    <img
+      alt="logo"
+      src="topbar_logo.png"
+    />
+  </a>
+  <ul
+    className="navbar-nav ml-auto"
+  >
+    <li
+      className="nav-item"
+    >
+      <a
+        className="nav-link"
+        href="/login"
+        onClick={[Function]}
+      >
+        Sign in
+      </a>
+    </li>
+    <li
+      className="nav-item"
+    >
+      <a
+        className="nav-link"
+        href="/register"
+        onClick={[Function]}
+      >
+        Sign up
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
+
+exports[`Header component Snapshot testing with user 1`] = `
+<nav
+  className="navbar navbar-expand-md navbar-dark"
+  style={
+    Object {
+      "padding": "0.5rem 2rem",
+    }
+  }
+>
+  <a
+    className="navbar-brand"
+    href="/"
+    onClick={[Function]}
+  >
+    <img
+      alt="logo"
+      src="topbar_logo.png"
+    />
+  </a>
+  <ul
+    className="navbar-nav ml-auto"
+  >
+    <li
+      className="nav-item"
+    >
+      <a
+        className="nav-link"
+        href="/editor"
+        onClick={[Function]}
+      >
+        <i
+          className="ion-compose"
+        />
+         New Item
+      </a>
+    </li>
+    <li
+      className="nav-item"
+    >
+      <a
+        className="nav-link"
+        href="/settings"
+        onClick={[Function]}
+      >
+        <i
+          className="ion-gear-a"
+        />
+         Settings
+      </a>
+    </li>
+    <li
+      className="nav-item"
+    >
+      <a
+        className="nav-link"
+        href="/@user name"
+        onClick={[Function]}
+      >
+        <img
+          alt="user name"
+          className="user-pic pr-1"
+          src="image.png"
+        />
+        user name
+      </a>
+    </li>
+  </ul>
+</nav>
+`;

@@ -1,0 +1,9 @@
+FROM node:16
+WORKDIR /usr/src
+
+COPY frontend ./frontend
+COPY .wilco ./.wilco
+
+# Pre-install npm packages
+WORKDIR /usr/src/frontend
+RUN yarn install

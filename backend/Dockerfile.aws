@@ -1,0 +1,10 @@
+FROM node:16
+
+WORKDIR /usr/src
+COPY backend ./backend
+COPY .wilco ./.wilco
+
+# Pre-install npm packages
+WORKDIR /usr/src/backend
+RUN yarn install
+
