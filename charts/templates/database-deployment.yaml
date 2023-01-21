@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.database.serviceName }}
+  name: {{ .Values.database.serviceName }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.database.serviceName }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.database.serviceName }}
+    spec:
+      containers:
+        - image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}"
+          name: {{ .Values.database.serviceName }}
+          imagePullPolicy: {{ .Values.database.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.database.containerPort }}
+          resources: {}
+          volumeMounts:
+            - mountPath: /data/db
+              name: {{ .Values.database.serviceName }}-0
+      restartPolicy: Always
+      volumes:
+        - name: {{ .Values.database.serviceName }}-0
+          persistentVolumeClaim:
+            claimName: {{ .Values.database.serviceName }}-0
