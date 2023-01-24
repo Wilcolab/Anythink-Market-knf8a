@@ -172,8 +172,12 @@ jobs:
               --set frontend.image.tag=${{ env.IMAGE_TAG }} \
               --set database.deploy=false \
               --set backend.image.tag=${{ env.IMAGE_TAG }} > manifests/anythink.yml
+          echo "pwd: "
           pwd
+          echo "ls: "
           ls
+          echo "manifests: "
+          ls manifests/
       - name: Armory CD-as-a-Service Deployment
         id: deploy
         uses: armory/cli-deploy-action@main
