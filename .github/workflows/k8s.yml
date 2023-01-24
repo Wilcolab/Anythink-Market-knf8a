@@ -172,6 +172,11 @@ jobs:
               --set frontend.image.tag=${{ env.IMAGE_TAG }} \
               --set database.deploy=false \
               --set backend.image.tag=${{ env.IMAGE_TAG }} > manifests/anythink.yml
-      - name: Deploy
-        run: |
-          echo "todo: setup armory GHA"
+      - name: Armory CD-as-a-Service Deployment
+        id: deploy
+        uses: armory/cli-deploy-action@main
+        with:
+          clientId: ${{ secrets.ARMORY_CLIENT_ID }}
+          clientSecret:  ${{ secrets.ARMORY_CLIENT_SECRET }}
+          path-to-file: "armory-deploy.yml" 
+          waitForDeployment: true
