@@ -2,7 +2,7 @@ name: Build and deploy to Kubernetes
 on:
   push:
     branches:
-      - "*"
+      - main
       
 concurrency:
   group: k8s
@@ -148,30 +148,10 @@ jobs:
 
       - name: Set the image tag
         run: echo IMAGE_TAG=${GITHUB_REPOSITORY/\//-}-latest >> $GITHUB_ENV
-        
-        
-      - name: get repo name
-        id: getrepo
-        run: echo REPO_NAME=`echo "${{github.repository}}" | tr '[:upper:]'  '[:lower:]' | cut -d '/' -f2`  >> $GITHUB_ENV
-        
-      - name: update namespace
-        uses: mikefarah/yq@master
-        with: 
-          cmd: |
-            yq -i '
-            .targets.staging.namespace = "${{ env.REPO_NAME }}"
-            ' 'armory-deploy.yml'
 
-      - name: mkdir
-        run: |
-          mkdir manifests
-      - name: bake
-        run: |
-          helm template --timeout 10m anythink-market ./charts/ \
-              --set clusterEnv=${{ secrets.CLUSTER_ENV }} \
-              --set frontend.image.tag=${{ env.IMAGE_TAG }} \
-              --set database.deploy=false \
-              --set backend.image.tag=${{ env.IMAGE_TAG }} > manifests/anythink.yml
       - name: Deploy
         run: |
-          echo "todo: setup armory GHA"
+          helm upgrade --install --timeout 10m anythink-market ./charts/ \
+              --set clusterEnv=${{ secrets.CLUSTER_ENV }} \
+              --set frontend.image.tag=${{ env.IMAGE_TAG }} \
+              --set backend.image.tag=${{ env.IMAGE_TAG }}
