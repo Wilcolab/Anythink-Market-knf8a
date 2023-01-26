@@ -1,0 +1,21 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    working_directory: ~/anythink/frontend
+    docker:
+      - image: cimg/node:16.18
+    steps:
+      - checkout:
+          path: ~/anythink
+      - run:
+          name: Install deps
+          command: yarn install
+      - run:
+          name: Run tests
+          command: yarn test
+
+workflows:
+  build-and-test:
+    jobs:
+      - build-and-test
