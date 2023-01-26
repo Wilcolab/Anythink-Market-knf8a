@@ -17,6 +17,9 @@ jobs:
       - run:
           name: Run tests
           command: yarn test
+      - run:
+          name: check code linting
+          command: yarn lint
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
