@@ -7,7 +7,8 @@ const mapDispatchToProps = (dispatch) => ({
   onClick: (payload, commentId) =>
     dispatch({ 
       type: DELETE_COMMENT, 
-      payload, commentId 
+      payload,
+      commentId,
     }),
 });
 
