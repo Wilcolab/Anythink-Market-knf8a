@@ -1,1 +1,1 @@
-console.log("puru")
+console.log("puru");
