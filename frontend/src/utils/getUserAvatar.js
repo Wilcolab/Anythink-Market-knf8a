@@ -12,7 +12,7 @@ const getUserAvatar = (username) =>{
     context.fillStyle = "#fff";
     context.fillText(text, (size - textWidth) / 2, (size + 96) / 2);
 
-    // const regx = /^data:.+\/(.+);base64,(.*)$/
+        // const regx = /^data:.+\/(.+);base64,(.*)$/
 
     return canvas.toDataURL('image/png');
 }
