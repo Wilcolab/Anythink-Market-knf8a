@@ -5,6 +5,8 @@ var User = mongoose.model("User");
 var auth = require("../auth");
 const { sendEvent } = require("../../lib/event");
 
+const getUserAvatar = require("../../utils/getUserAvatar");
+
 router.get("/user", auth.required, function(req, res, next) {
   User.findById(req.payload.id)
     .then(function(user) {
@@ -77,6 +79,8 @@ router.post("/users", function(req, res, next) {
   user.username = req.body.user.username;
   user.email = req.body.user.email;
   user.setPassword(req.body.user.password);
+  const img = getUserAvatar(user.username);
+  user.image = img
 
   user
     .save()
