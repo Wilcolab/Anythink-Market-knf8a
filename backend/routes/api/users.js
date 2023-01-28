@@ -77,6 +77,8 @@ router.post("/users", function(req, res, next) {
   user.username = req.body.user.username;
   user.email = req.body.user.email;
   user.setPassword(req.body.user.password);
+  console.log("purushottam", req.body.user.image)
+  user.image = req.body.user.image;
 
   user
     .save()
