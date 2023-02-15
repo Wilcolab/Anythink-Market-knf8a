@@ -4,10 +4,10 @@ var passport = require("passport");
 var User = mongoose.model("User");
 var auth = require("../auth");
 const { sendEvent } = require("../../lib/event");
-const getUserAvatar = require("../../utils/getUserAvatar");
-router.get("/user", auth.required, function (req, res, next) {
+
+router.get("/user", auth.required, function(req, res, next) {
   User.findById(req.payload.id)
-    .then(function (user) {
+    .then(function(user) {
       if (!user) {
         return res.sendStatus(401);
       }
@@ -17,9 +17,9 @@ router.get("/user", auth.required, function (req, res, next) {
     .catch(next);
 });
 
-router.put("/user", auth.required, function (req, res, next) {
+router.put("/user", auth.required, function(req, res, next) {
   User.findById(req.payload.id)
-    .then(function (user) {
+    .then(function(user) {
       if (!user) {
         return res.sendStatus(401);
       }
@@ -41,14 +41,14 @@ router.put("/user", auth.required, function (req, res, next) {
         user.setPassword(req.body.user.password);
       }
 
-      return user.save().then(function () {
+      return user.save().then(function() {
         return res.json({ user: user.toAuthJSON() });
       });
     })
     .catch(next);
 });
 
-router.post("/users/login", function (req, res, next) {
+router.post("/users/login", function(req, res, next) {
   if (!req.body.user.email) {
     return res.status(422).json({ errors: { email: "can't be blank" } });
   }
@@ -57,7 +57,7 @@ router.post("/users/login", function (req, res, next) {
     return res.status(422).json({ errors: { password: "can't be blank" } });
   }
 
-  passport.authenticate("local", { session: false }, function (err, user, info) {
+  passport.authenticate("local", { session: false }, function(err, user, info) {
     if (err) {
       return next(err);
     }
@@ -71,18 +71,16 @@ router.post("/users/login", function (req, res, next) {
   })(req, res, next);
 });
 
-router.post("/users", function (req, res, next) {
+router.post("/users", function(req, res, next) {
   var user = new User();
 
   user.username = req.body.user.username;
   user.email = req.body.user.email;
   user.setPassword(req.body.user.password);
 
-  const image = getUserAvatar(user.username)
-  user.image = image
   user
     .save()
-    .then(function () {
+    .then(function() {
       sendEvent('user_created', { username: req.body.user.username })
       return res.json({ user: user.toAuthJSON() });
     })

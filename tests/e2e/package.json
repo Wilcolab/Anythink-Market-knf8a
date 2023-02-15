@@ -1,0 +1,32 @@
+{
+  "name": "http-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "yarn jest -c jest.sequential.config.js --maxWorkers=1 && yarn jest -c jest.concurrent.config.js --maxWorkers=100%",
+    "format": "yarn prettier --write .",
+    "lint": "yarn eslint . && yarn prettier -c ."
+  },
+  "dependencies": {
+    "assert": "^2.0.0",
+    "axios": "^1.2.4",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jest": "^29.4.1",
+    "wait-on": "^7.0.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.4.1",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "prettier": "^2.8.3"
+  }
+}

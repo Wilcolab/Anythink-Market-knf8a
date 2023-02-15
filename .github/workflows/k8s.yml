@@ -10,7 +10,7 @@ concurrency:
   
 jobs:
   check-kubernetes-enabled:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     outputs:
       kubernetes-enabled: ${{ steps.kubernetes-flag-defined.outputs.DEFINED }}
     steps:
@@ -21,7 +21,7 @@ jobs:
           ENABLE_KUBERNETES: ${{ secrets.ENABLE_KUBERNETES }}
 
   check-secret:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [check-kubernetes-enabled]
     outputs:
       aws-creds-defined: ${{ steps.aws-creds-defined.outputs.DEFINED }}

@@ -28,7 +28,7 @@ printf "[=  ] Stashing any existing changes ... \n"
 git stash &> /dev/null
 
 printf "[== ] Resetting local 'main' branch to 'origin/main' ... \n"
-git_output=$((git checkout main && git fetch origin main && git reset --hard origin/main) 2>&1 > /dev/null)
+git_output=$( (git checkout main && git fetch origin main && git reset --hard origin/main) 2>&1 > /dev/null)
 git_exit_code=$?
 
 if ! test "$git_exit_code" -eq 0
