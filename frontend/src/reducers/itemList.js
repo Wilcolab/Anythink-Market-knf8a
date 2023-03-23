@@ -73,8 +73,8 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         pager: action.pager,
-        items: action.payload[1].items,
-        itemsCount: action.payload[1].itemsCount,
+        items: action.payload?.[1]?.items,
+        itemsCount: action.payload?.[1]?.itemsCount,
         currentPage: 0,
       };
     case PROFILE_PAGE_UNLOADED:

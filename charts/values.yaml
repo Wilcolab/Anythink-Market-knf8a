@@ -45,6 +45,7 @@ frontend:
       memory: 128Mi
 
 database:
+  deploy: true
   serviceName: mongodb-node
   containerPort: 27017
   servicePort: 27017

@@ -1,5 +1,5 @@
 import ListErrors from "./ListErrors";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import agent from "../agent";
 import { connect } from "react-redux";
 import {
@@ -8,125 +8,91 @@ import {
   LOGOUT,
 } from "../constants/actionTypes";
 
-class SettingsForm extends React.Component {
-  constructor() {
-    super();
+const SettingsForm = ({ currentUser, onSubmitForm }) => {
+  const [user, setUser] = useState({});
 
-    this.state = {
-      image: "",
-      username: "",
-      bio: "",
-      email: "",
-      password: "",
-    };
-
-    this.updateState = (field) => (ev) => {
-      const state = this.state;
-      const newState = Object.assign({}, state, { [field]: ev.target.value });
-      this.setState(newState);
-    };
-
-    this.submitForm = (ev) => {
-      ev.preventDefault();
-
-      const user = Object.assign({}, this.state);
-      if (!user.password) {
-        delete user.password;
-      }
-
-      this.props.onSubmitForm(user);
-    };
-  }
-
-  componentWillMount() {
-    if (this.props.currentUser) {
-      Object.assign(this.state, {
-        image: this.props.currentUser.image || "",
-        username: this.props.currentUser.username,
-        bio: this.props.currentUser.bio,
-        email: this.props.currentUser.email,
-      });
+  useEffect(() => {
+    if (currentUser) {
+      setUser(currentUser);
     }
-  }
+  }, [currentUser]);
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser) {
-      this.setState(
-        Object.assign({}, this.state, {
-          image: nextProps.currentUser.image || "",
-          username: nextProps.currentUser.username,
-          bio: nextProps.currentUser.bio,
-          email: nextProps.currentUser.email,
-        })
-      );
+  const updateState = useCallback((field) => (ev) => {
+    const newState = Object.assign({}, user, { [field]: ev.target.value });
+    setUser(newState);
+  }, [user]);
+
+  const submitForm = useCallback((ev) => {
+    ev.preventDefault();
+    const userToSubmit = { ...user };
+    if (!userToSubmit.password) {
+      delete userToSubmit.password;
     }
-  }
+    onSubmitForm(userToSubmit);
+  }, [user, onSubmitForm]);
 
-  render() {
-    return (
-      <form onSubmit={this.submitForm}>
-        <fieldset>
-          <fieldset className="form-group">
-            <input
-              className="form-control"
-              type="text"
-              placeholder="URL of profile picture"
-              value={this.state.image}
-              onChange={this.updateState("image")}
-            />
-          </fieldset>
-
-          <fieldset className="form-group">
-            <input
-              className="form-control form-control-lg"
-              type="text"
-              placeholder="Username"
-              value={this.state.username}
-              onChange={this.updateState("username")}
-            />
-          </fieldset>
-
-          <fieldset className="form-group">
-            <textarea
-              className="form-control form-control-lg"
-              rows="8"
-              placeholder="Short bio about you"
-              value={this.state.bio}
-              onChange={this.updateState("bio")}
-            ></textarea>
-          </fieldset>
-
-          <fieldset className="form-group">
-            <input
-              className="form-control form-control-lg"
-              type="email"
-              placeholder="Email"
-              value={this.state.email}
-              onChange={this.updateState("email")}
-            />
-          </fieldset>
-
-          <fieldset className="form-group">
-            <input
-              className="form-control form-control-lg"
-              type="password"
-              placeholder="New Password"
-              value={this.state.password}
-              onChange={this.updateState("password")}
-            />
-          </fieldset>
-
-          <button
-            className="btn btn-lg btn-primary pull-xs-right"
-            type="submit"
-            disabled={this.state.inProgress}
-          >
-            Update Settings
-          </button>
+  return (
+    <form onSubmit={submitForm}>
+      <fieldset>
+        <fieldset className="form-group">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="URL of profile picture"
+            value={user.image}
+            onChange={updateState("image")}
+          />
         </fieldset>
-      </form>
-    );
-  }
+
+        <fieldset className="form-group">
+          <input
+            className="form-control form-control-lg"
+            type="text"
+            placeholder="Username"
+            value={user.username}
+            onChange={updateState("username")}
+          />
+        </fieldset>
+
+        <fieldset className="form-group">
+          <textarea
+            className="form-control form-control-lg"
+            rows="8"
+            placeholder="Short bio about you"
+            value={user.bio}
+            onChange={updateState("bio")}
+          ></textarea>
+        </fieldset>
+
+        <fieldset className="form-group">
+          <input
+            className="form-control form-control-lg"
+            type="email"
+            placeholder="Email"
+            value={user.email}
+            onChange={updateState("email")}
+          />
+        </fieldset>
+
+        <fieldset className="form-group">
+          <input
+            className="form-control form-control-lg"
+            type="password"
+            placeholder="New Password"
+            value={user.password}
+            onChange={updateState("password")}
+          />
+        </fieldset>
+
+        <button
+          className="btn btn-lg btn-primary pull-xs-right"
+          type="submit"
+        >
+          Update Settings
+        </button>
+      </fieldset>
+    </form>
+  );
 }
 
 const mapStateToProps = (state) => ({

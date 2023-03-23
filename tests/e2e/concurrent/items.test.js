@@ -11,6 +11,7 @@ const {
   randomUserInfo,
   randomImageUrl,
   randomString,
+  matchObjects,
 } = require("../utils");
 
 let anythinkClient;
@@ -31,10 +32,11 @@ describe("Items Route", () => {
       const item = randomItemInfo();
 
       const createdItem = await anythinkClient.createItem(item, user);
-      expect(createdItem).toMatchObject(item);
+      expect(matchObjects(createdItem, item)).toBe(true);
 
       const receivedItem = await anythinkClient.getItem(createdItem.slug);
-      expect(receivedItem).toMatchObject(createdItem);
+
+      expect(matchObjects(receivedItem, createdItem)).toBe(true);
     });
 
     test("Can't create item without title", async () => {
@@ -150,14 +152,15 @@ describe("Items Route", () => {
         updateInfo,
         user
       );
-
-      expect(updatedItemResult).toMatchObject({
-        ...origItemInfo,
-        ...updateInfo,
-      });
+      expect(
+        matchObjects(updatedItemResult, {
+          ...origItemInfo,
+          ...updateInfo,
+        })
+      ).toBe(true);
 
       const retreivedItem = await anythinkClient.getItem(item.slug);
-      expect(retreivedItem).toMatchObject(updatedItemResult);
+      expect(matchObjects(retreivedItem, updatedItemResult)).toBe(true);
     };
   });
 

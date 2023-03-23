@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "16"
+  },
   "scripts": {
     "test": "yarn jest -c jest.sequential.config.js --maxWorkers=1 && yarn jest -c jest.concurrent.config.js --maxWorkers=100%",
     "format": "yarn prettier --write .",
