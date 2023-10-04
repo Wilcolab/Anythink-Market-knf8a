@@ -6,6 +6,11 @@
 /frontend/node_modules
 /.wilco-helpers/node_modules
 /tests/e2e/node_modules
+/tests/frontend/node_modules/
+/tests/frontend/test-results/
+/tests/frontend/playwright-report/
+/tests/frontend/playwright/.cache/
+
 /.pnp
 .pnp.js
 

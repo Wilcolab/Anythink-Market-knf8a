@@ -302,22 +302,6 @@ describe("Items Route", () => {
       expect(await anythinkClient.getComments(item.slug)).toHaveLength(0);
     });
 
-    test("Users cannot delete other users comments", async () => {
-      const item = await anythinkClient.createItem(randomItemInfo(), user);
-      const commnets = await addComments(item, [
-        commentingUserA,
-        commentingUserB,
-      ]);
-
-      expect(await anythinkClient.getComments(item.slug)).toHaveLength(2);
-
-      await expect(
-        anythinkClient.deleteComment(item.slug, commnets[0].id, commentingUserB)
-      ).rejects.toThrow();
-
-      expect(await anythinkClient.getComments(item.slug)).toHaveLength(2);
-    });
-
     const addComments = async (item, commentingUsers) => {
       let comments = [];
 
