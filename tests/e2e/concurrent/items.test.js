@@ -159,8 +159,8 @@ describe("Items Route", () => {
         })
       ).toBe(true);
 
-      const retreivedItem = await anythinkClient.getItem(item.slug);
-      expect(matchObjects(retreivedItem, updatedItemResult)).toBe(true);
+      const retrievedItem = await anythinkClient.getItem(item.slug);
+      expect(matchObjects(retrievedItem, updatedItemResult)).toBe(true);
     };
   });
 
@@ -265,17 +265,17 @@ describe("Items Route", () => {
       ).rejects.toThrow();
     });
 
-    test("Comments are retreived in reversed order", async () => {
+    test("Comments are retrieved in reversed order", async () => {
       const item = await anythinkClient.createItem(randomItemInfo(), user);
-      const commnets = await addComments(item, [
+      const comments = await addComments(item, [
         commentingUserA,
         commentingUserB,
       ]);
 
       const itemsComments = await anythinkClient.getComments(item.slug);
 
-      expect(itemsComments[0]).toMatchObject(commnets[1]);
-      expect(itemsComments[1]).toMatchObject(commnets[0]);
+      expect(itemsComments[0]).toMatchObject(comments[1]);
+      expect(itemsComments[1]).toMatchObject(comments[0]);
     });
 
     test("Users can delete their own comments", async () => {

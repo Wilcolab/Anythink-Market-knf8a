@@ -1,42 +1,4 @@
 {
   "name": "Anythink Development Container",
-  "image": "public.ecr.aws/v0a2l7y2/wilco/anythink-devcontainer:latest",
-  "forwardPorts": [3000, 3001, 5433, 27017],
-  "portsAttributes": {
-    "3000": {
-      "label": "Backend",
-      "elevateIfNeeded": true,
-      "requireLocalPort": true,
-      "onAutoForward": "silent"
-    },
-    "3001": {
-      "label": "Frontend",
-      "elevateIfNeeded": true,
-      "requireLocalPort": true,
-      "onAutoForward": "silent"
-    },
-    "5433": {
-      "label": "Database",
-      "elevateIfNeeded": true,
-      "requireLocalPort": true,
-      "onAutoForward": "silent"
-    },
-    "27017": {
-      "label": "Database",
-      "elevateIfNeeded": true,
-      "requireLocalPort": true,
-      "onAutoForward": "silent"
-    }
-  },
-  "postStartCommand": "bash -c .devcontainer/setup.sh",
-
-  "settings": {
-    "extensions.ignoreRecommendations": true,
-    "workbench.startupEditor": "none",
-    "workbench.colorTheme": "Visual Studio Dark",
-    "workbench.colorCustomizations": {},
-    "workbench.welcomePage.walkthroughs.openOnInstall": false,
-    "workbench.welcomePage.experimental.videoTutorials": "off",
-    "github.codespaces.defaultExtensions": []
-  }
+  "image": "public.ecr.aws/v0a2l7y2/wilco/anythink-devcontainer:latest"
 }
